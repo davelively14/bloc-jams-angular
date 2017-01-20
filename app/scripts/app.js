@@ -10,7 +10,7 @@
         // requireBase: false will disable hashbangs (#!)
         requireBase: false
       });
-      
+
     // UI-Router core component
     $stateProvider
       .state('landing', {
@@ -20,6 +20,10 @@
       .state('album', {
         url: '/album',
         templateUrl: '/templates/album.html'
+      })
+      .state('collection', {
+        url: '/collection',
+        templateUrl: '/templates/collection.html'
       });
   }
 
