@@ -1,7 +1,7 @@
 (function() {
 
-  function AlbumCtrl() {
-    this.albumData = angular.copy(albumPicasso);
+  function AlbumCtrl(Fixtures) {
+    this.albumData = Fixtures.getAlbum();
 
     this.filterTimeCode = function(timeInSeconds) {
       var minutes = Math.floor(timeInSeconds / 60);
@@ -12,5 +12,5 @@
 
   angular
     .module('blocJams')
-    .controller('AlbumCtrl', AlbumCtrl);
+    .controller('AlbumCtrl', ['Fixtures', AlbumCtrl]);
 })();
