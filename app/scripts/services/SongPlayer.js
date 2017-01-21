@@ -12,7 +12,7 @@
     * @desc Stores the current album
     * @type {Object}
     */
-    var currentAlbum = Fixtures.getAlbum();
+    currentAlbum = Fixtures.getAlbum();
 
     /*
     * @desc Buzz object audio file
@@ -27,8 +27,7 @@
     */
     var setSong = function(song) {
       if (currentBuzzObject) {
-        currentBuzzObject.stop();
-        SongPlayer.currentSong.playing = null;
+        stopSong();
       }
 
       currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -99,6 +98,23 @@
       currentBuzzObject.pause();
       song.playing = false;
     };
+
+    /*
+    * @function SongPlayer.previous
+    * @desc Public function that will play the previous song or stop if there is no previous song
+    */
+    SongPlayer.next = function() {
+      var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+      currentSongIndex++;
+
+      if (currentSongIndex >= currentAlbum.songs.length) {
+        stopSong();
+      } else {
+        var song = currentAlbum.songs[currentSongIndex];
+        setSong(song);
+        playSong(song);
+      }
+    }
 
     /*
     * @function SongPlayer.previous
