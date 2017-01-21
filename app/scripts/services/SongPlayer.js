@@ -1,4 +1,9 @@
 (function() {
+
+  /*
+  * @function SongPlayer
+  * @desc Constructor for the SongPlayer controller
+  */
   function SongPlayer () {
     var SongPlayer = {};
 
@@ -35,6 +40,15 @@
     };
 
     /*
+    * @function playSong
+    * @desc Plays the current song
+    */
+    var playSong = function(song) {
+      currentBuzzObject.play();
+      song.playing = true;
+    };
+
+    /*
     * @function SongPlayer.play
     * @desc Public function that will unpause or begin playing a song
     * @param {Object} song
@@ -42,8 +56,7 @@
     SongPlayer.play = function(song) {
       if (currentSong !== song) {
         setSong(song);
-        currentBuzzObject.play();
-        song.playing = true;
+        playSong(song);
       } else {
         if (currentBuzzObject.isPaused()) {
           currentBuzzObject.play();
