@@ -61,6 +61,15 @@
         };
 
         /*
+        * @function scope.thumbStyle
+        * @desc Returns the location from the left of the screen for where the thumb should be
+        * @return {Object}
+        */
+        scope.thumbStyle = function() {
+          return {left: percentString()};
+        };
+
+        /*
         * @function scope.onClickSeekBar
         * @desc Updates the seek bar value based on the seek bar's width and the location of the user's click on the seek bar.
         */
