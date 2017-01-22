@@ -23,7 +23,7 @@
       <div class="seek-control">
         <!-- Changes seek bar values from default 0 value and 100 max to currentTime  -->
         <seek-bar value="{{ playerBar.songPlayer.currentTime }}" max="{{ playerBar.songPlayer.currentSong.duration}}" on-change="playerBar.songPlayer.setCurrentTime(value)"></seek-bar>
-        <div class="current-time">-:--</div>
+        <div class="current-time">{{ playerBar.songPlayer.filterTimeCode(playerBar.songPlayer.currentTime) }}</div>
         <div class="total-time">-:--</div>
       </div>
       <h2 class="artist-song-mobile" ng-show="playerBar.songPlayer.currentSong">{{ playerBar.albumData.artist + " - " + playerBar.songPlayer.currentSong.title }}</h2>
@@ -31,7 +31,7 @@
     </div>
     <div class="control-group volume">
       <span class="ion-volume-high icon"></span>
-      <seek-bar></seek-bar>
+      <seek-bar value="{{ playerBar.songPlayer.volume }}" max="{{ 100 }}" on-change="playerBar.songPlayer.setVolume(value)"></seek-bar>
     </div>
   </div>
 </section>

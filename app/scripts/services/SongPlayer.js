@@ -86,6 +86,12 @@
     SongPlayer.currentTime = null;
 
     /**
+    * @desc Maintains the state of the current volume.
+    * @type {Number}
+    */
+    SongPlayer.volume = 80;
+
+    /**
     * @function SongPlayer.play
     * @desc Public function that will unpause or begin playing a song
     * @param {Object} song
@@ -146,13 +152,34 @@
     };
 
     /**
-    * @function setCurrentTime
+    * @function SongPlayer.setCurrentTime
     * @desc Set current time (in seconds) of currently playing song
     * @param {Number} time
     */
     SongPlayer.setCurrentTime = function(time) {
       if (currentBuzzObject) {
         currentBuzzObject.setTime(time);
+      }
+    };
+
+    /**
+    * @function SongPlayer.filterTimeCode
+    * @desc Converts a time from seconds to a "minutes : seconds" format
+    * @param {Number} timeInSeconds
+    * @return {String}
+    */
+    SongPlayer.filterTimeCode = function(timeInSeconds) {
+      return buzz.toTimer(timeInSeconds);
+    };
+
+    /**
+    * @function SongPlayer.setVolume
+    * @desc Sets volume to the given level
+    * @param {Number} newVolume
+    */
+    SongPlayer.setVolume = function(newVolume) {
+      if (currentBuzzObject) {
+        currentBuzzObject.setVolume(newVolume);
       }
     };
 
