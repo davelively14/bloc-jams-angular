@@ -1,26 +1,26 @@
 (function() {
 
-  /*
+  /**
   * @function SongPlayer
   * @desc Constructor for the SongPlayer controller
   * @return {Object} SongPlayer
   */
-  function SongPlayer (Fixtures) {
+  function SongPlayer ($rootScope, Fixtures) {
     var SongPlayer = {};
 
-    /*
+    /**
     * @desc Stores the current album
     * @type {Object}
     */
     currentAlbum = Fixtures.getAlbum();
 
-    /*
+    /**
     * @desc Buzz object audio file
     * @type {Object}
     */
     var currentBuzzObject = null;
 
-    /*
+    /**
     * @function setSong
     * @desc Stops currently playing song and loads new audio file as currentBuzzObject
     * @param {Object} song
@@ -35,10 +35,16 @@
         preload: true
       });
 
+      currentBuzzObject.bind('timeupdate', function() {
+        $rootScope.$apply(function() {
+          SongPlayer.currentTime = currentBuzzObject.getTime();
+        });
+      });
+
       SongPlayer.currentSong = song;
     };
 
-    /*
+    /**
     * @function playSong
     * @desc Plays the current song
     * @param {Object} song
@@ -48,7 +54,7 @@
       song.playing = true;
     };
 
-    /*
+    /**
     * @function stopSong
     * @desc Stops the current song, nulls currentSong
     */
@@ -57,7 +63,7 @@
       SongPlayer.currentSong.playing = null;
     };
 
-    /*
+    /**
     * @function playSong
     * @desc Plays the current song
     * @param {Object} song
@@ -67,13 +73,19 @@
       return currentAlbum.songs.indexOf(song);
     };
 
-    /*
+    /**
     * @desc Active song object from list of songs
     * @type {Object}
     */
     SongPlayer.currentSong = null;
 
-    /*
+    /**
+    * @desc Current playback time (in seconds) of currently playing song
+    * @type {Number}
+    */
+    SongPlayer.currentTime = null;
+
+    /**
     * @function SongPlayer.play
     * @desc Public function that will unpause or begin playing a song
     * @param {Object} song
@@ -88,7 +100,7 @@
       playSong(song);
     };
 
-    /*
+    /**
     * @function SongPlayer.pause
     * @desc Public function that will pause a song
     * @param {Object} song
@@ -99,7 +111,7 @@
       song.playing = false;
     };
 
-    /*
+    /**
     * @function SongPlayer.previous
     * @desc Public function that will play the previous song or stop if there is no previous song
     */
@@ -116,7 +128,7 @@
       }
     }
 
-    /*
+    /**
     * @function SongPlayer.previous
     * @desc Public function that will play the previous song or stop if there is no previous song
     */
@@ -133,10 +145,21 @@
       }
     };
 
+    /**
+    * @function setCurrentTime
+    * @desc Set current time (in seconds) of currently playing song
+    * @param {Number} time
+    */
+    SongPlayer.setCurrentTime = function(time) {
+      if (currentBuzzObject) {
+        currentBuzzObject.setTime(time);
+      }
+    };
+
     return SongPlayer;
   }
 
   angular
     .module('blocJams')
-    .factory('SongPlayer', ['Fixtures', SongPlayer]);
+    .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
 })();

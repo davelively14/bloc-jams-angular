@@ -1,7 +1,7 @@
 (function() {
   function seekBar($document) {
 
-    /*
+    /**
     * @function calculatePercent
     * @desc Calculates the horizontal percent along the seek bar where the event occurred.
     * @return {number}
@@ -19,27 +19,39 @@
       templateUrl: '/templates/directives/seek_bar.html',
       replace: true,
       restrict: 'E',
-      scope: { },
+      scope: {
+        onChange: '&'
+      },
       link: function(scope, element, attributes) {
-        /*
+        /**
         * @desc Stores the current value of the seek bar. Default is 0.
         * @type {Number}
         */
         scope.value = 0;
 
-        /*
+        /**
         * @desc Stores the max value of the seek bar. Default is 100.
         * @type {Number}
         */
         scope.max = 100;
 
-        /*
+        /**
         * @desc The DOM element that matches the <seek-bar> as a jQuery object.
         * @type {Object}
         */
         var seekBar = $(element);
 
-        /*
+        // When the 'value' attribute changes, the callback function is executed
+        attributes.$observe('value', function(newValue) {
+          scope.value = newValue;
+        });
+
+        // When the 'max' attribute changes, the callback function is executed
+        attributes.$observe('max', function(newValue) {
+          scope.max = newValue;
+        });
+
+        /**
         * @function percentString
         * @desc Calculates and returns a percent based on the value and maximum value for the a seek bar
         * @return {String}
@@ -51,7 +63,7 @@
           return percent + "%";
         };
 
-        /*
+        /**
         * @function scope.fillStyle
         * @desc Returns the width of the seekbar for the given percentage
         * @return {Object}
@@ -60,7 +72,7 @@
           return {width: percentString()};
         };
 
-        /*
+        /**
         * @function scope.thumbStyle
         * @desc Returns the location from the left of the screen for where the thumb should be
         * @return {Object}
@@ -69,16 +81,17 @@
           return {left: percentString()};
         };
 
-        /*
+        /**
         * @function scope.onClickSeekBar
         * @desc Updates the seek bar value based on the seek bar's width and the location of the user's click on the seek bar.
         */
         scope.onClickSeekBar = function() {
           var percent = calculatePercent(seekBar, event);
-          scope.value = percent * scope.max
+          scope.value = percent * scope.max;
+          notifyOnChange(scope.value);
         };
 
-        /*
+        /**
         * @function scope.trackThumb
         * @desc Similar to scope.onClickSeekBar, but uses $apply to constantly apply the change in value of scope.value as the user drags the seek bar thumb
         */
@@ -86,7 +99,8 @@
           $document.bind('mousemove.thumb', function() {
             var percent = calculatePercent(seekBar, event);
             scope.$apply(function() {
-              scope.value = percent * scope.max
+              scope.value = percent * scope.max;
+              notifyOnChange(scope.value);
             });
           });
 
@@ -94,6 +108,16 @@
             $document.unbind('mousemove.thumb');
             $document.unbind('mouseup.thumb');
           })
+        };
+
+        /**
+        * @function notifyOnChange
+        * @desc Notifies onChange function that 'value' has changed.
+        */
+        var notifyOnChange = function(newValue) {
+          if (typeof scope.onChange === 'function') {
+            scope.onChange({value: newValue});
+          }
         };
       }
     };
