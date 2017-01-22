@@ -79,7 +79,7 @@
     * @param {Object} song
     */
     SongPlayer.play = function(song) {
-      song = song || SongPlayer.currentSong;
+      song = song || SongPlayer.currentSong || currentAlbum.songs[0];
 
       if (SongPlayer.currentSong !== song) {
         setSong(song);
