@@ -23,8 +23,8 @@
       <div class="seek-control">
         <!-- Changes seek bar values from default 0 value and 100 max to currentTime  -->
         <seek-bar value="{{ playerBar.songPlayer.currentTime }}" max="{{ playerBar.songPlayer.currentSong.duration}}" on-change="playerBar.songPlayer.setCurrentTime(value)"></seek-bar>
-        <div class="current-time">{{ playerBar.songPlayer.filterTimeCode(playerBar.songPlayer.currentTime) }}</div>
-        <div class="total-time">-:--</div>
+        <div class="current-time">{{ playerBar.songPlayer.currentTime | timecode }}</div>
+        <div class="total-time">{{ playerBar.songPlayer.currentSong.duration | timecode }}</div>
       </div>
       <h2 class="artist-song-mobile" ng-show="playerBar.songPlayer.currentSong">{{ playerBar.albumData.artist + " - " + playerBar.songPlayer.currentSong.title }}</h2>
       <h2 class="artist-name" ng-show="playerBar.songPlayer.currentSong">{{ playerBar.albumData.artist}}</h2>
