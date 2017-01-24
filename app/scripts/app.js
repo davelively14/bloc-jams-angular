@@ -28,6 +28,11 @@
         url: '/collection',
         controller: 'CollectionCtrl as collection',
         templateUrl: '/templates/collection.html'
+      })
+      .state('user', {
+        url: '/user',
+        controller: 'UserCtrl as user',
+        templateUrl: '/templates/user.html'
       });
   }
 
