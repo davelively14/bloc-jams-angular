@@ -96,6 +96,27 @@
     SongPlayer.volume = 80;
 
     /**
+    * @desc Tracks if mute is active (true) or not (false)
+    * @type {Boolean}
+    */
+    SongPlayer.isMuted = false;
+
+    /**
+    * @function SongPlayer.mute
+    * @desc Toggles isMuted variable and mutes/unumutes the sound
+    * @param {Object} song
+    */
+    SongPlayer.toggleMute = function() {
+      if (!SongPlayer.isMuted) {
+        currentBuzzObject.mute();
+        SongPlayer.isMuted = !SongPlayer.isMuted
+      } else {
+        currentBuzzObject.unmute();
+        SongPlayer.isMuted = !SongPlayer.isMuted
+      }
+    };
+
+    /**
     * @function SongPlayer.play
     * @desc Public function that will unpause or begin playing a song
     * @param {Object} song

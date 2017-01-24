@@ -30,7 +30,10 @@
       <h2 class="artist-name" ng-show="playerBar.songPlayer.currentSong">{{ playerBar.albumData.artist}}</h2>
     </div>
     <div class="control-group volume">
-      <span class="ion-volume-high icon"></span>
+      <a  ng-click="playerBar.songPlayer.toggleMute()">
+        <span class="ion-volume-high icon" ng-show="playerBar.songPlayer.isMuted === false"></span>
+        <span class="ion-volume-mute icon" ng-show="playerBar.songPlayer.isMuted === true"></span>
+      </a>
       <seek-bar value="{{ playerBar.songPlayer.volume }}" max="{{ 100 }}" on-change="playerBar.songPlayer.setVolume(value)"></seek-bar>
     </div>
   </div>
