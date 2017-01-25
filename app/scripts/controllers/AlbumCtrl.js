@@ -1,7 +1,7 @@
 (function() {
 
-  function AlbumCtrl(Fixtures, SongPlayer, $scope) {
-    $scope.albumData = Fixtures.getAlbum();
+  function AlbumCtrl(Fixtures, SongPlayer, $scope, $stateParams) {
+    $scope.albumData = Fixtures.getAlbum($stateParams.id);
     $scope.songPlayer = SongPlayer;
 
     $scope.setRating = function(value) {
@@ -15,5 +15,5 @@
 
   angular
     .module('blocJams')
-    .controller('AlbumCtrl', ['Fixtures', 'SongPlayer', '$scope', AlbumCtrl]);
+    .controller('AlbumCtrl', ['Fixtures', 'SongPlayer', '$scope', '$stateParams', AlbumCtrl]);
 })();

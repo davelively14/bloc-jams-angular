@@ -20,7 +20,7 @@
         templateUrl: '/templates/landing.html'
       })
       .state('album', {
-        url: '/album',
+        url: '/album?id',
         controller: 'AlbumCtrl as album',
         templateUrl: '/templates/album.html'
       })

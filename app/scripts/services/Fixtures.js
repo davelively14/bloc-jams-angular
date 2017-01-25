@@ -28,40 +28,35 @@
       year: '1909',
       albumArtUrl: '/assets/images/album_covers/20.png',
       songs: [
-        { title: 'Hello, Operator?', duration: '1:01', rating: null },
-        { title: 'Ring, ring, ring', duration: '5:01', rating: null },
-        { title: 'Fits in your pocket', duration: '3:21', rating: null },
-        { title: 'Can you hear me now?', duration: '3:14', rating: null },
-        { title: 'Wrong phone number', duration: '2:15', rating: null }
+        { title: 'Hello, Operator?', duration: 161.71, audioUrl: 'assets/music/blue', rating: null },
+        { title: 'Ring, ring, ring', duration: 103.96, audioUrl: 'assets/music/green', rating: null },
+        { title: 'Fits in your pocket', duration: 268.45, audioUrl: 'assets/music/red', rating: null },
+        { title: 'Can you hear me now?', duration: 153.14, audioUrl: 'assets/music/pink', rating: null },
+        { title: 'Wrong phone number', duration: 374.22, audioUrl: 'assets/music/magenta', rating: null }
       ],
       rating: 0
     };
 
-    Fixtures.getAlbum = function() {
-      return albumPicasso;
+    var albums = [
+      albumPicasso, albumMarconi
+    ];
+
+    Fixtures.getAlbum = function(id=0) {
+      return albums.find(function(album) {
+        return album.id == id;
+      });
     };
 
     Fixtures.getAllAlbums = function() {
-      return [albumPicasso, albumMarconi];
+      return albums;
     };
 
     Fixtures.rateAlbum = function(albumId, rating) {
-      var allAlbums = Fixtures.getAllAlbums();
-
-      var album = allAlbums.find(function(x) {
-        return x.id == albumId;
-      });
-      album.rating = rating;
+      Fixtures.getAlbum(albumId).rating = rating;
     };
 
     Fixtures.rateSong = function(albumId, songIndex, rating) {
-      var allAlbums = Fixtures.getAllAlbums();
-
-      var album = allAlbums.find(function(x) {
-        return x.id == albumId;
-      });
-
-      album.songs[songIndex].rating = rating;
+      Fixtures.getAlbum(albumId).songs[songIndex].rating = rating;
     };
 
     Fixtures.getCollection = function(numberOfAlbum) {
