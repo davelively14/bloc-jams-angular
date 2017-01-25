@@ -1,0 +1,60 @@
+<div class="narrow container">
+  <h1>Search</h1>
+  <form name="runSearch" ng-submit="submit()">
+    <table>
+      <tr>
+        <td> <input type="text" ng-model="text" name="text"> </td>
+        <td> <input type="submit" id="submit" value="Search"> </td>
+      </tr>
+    </table>
+  </form>
+  <h2>Results</h2>
+  <div ng-show="albumResults[0]">
+    <h4>Albums</h4>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th># Tracks</th>
+      </tr>
+      <tr ng-repeat="album in albumResults track by $index">
+        <td>{{ album.title }}</td>
+        <td>{{ album.artist }}</td>
+        <td>{{ album.songs.length }}</td>
+      </tr>
+    </table>
+  </div>
+  <div ng-show="artistResults[0]">
+    <h4>Artists</h4>
+    <table>
+      <tr>
+        <th>Artist</th>
+        <th>Title</th>
+        <th># Tracks</th>
+      </tr>
+      <tr ng-repeat="artist in artistResults track by $index">
+        <td>{{ artist.artist }}</td>
+        <td>{{ artist.title }}</td>
+        <td>{{ artist.songs.length }}</td>
+      </tr>
+    </table>
+  </div>
+  <div ng-show="songResults[0]">
+    <h4>Songs</h4>
+    <table>
+      <tr>
+        <th>Song</th>
+        <th>Album</th>
+        <th>Artist</th>
+      </tr>
+      <tr ng-repeat="result in songResults track by $index">
+        <td>{{ result.song.title }}</td>
+        <td>{{ result.album.title }}</td>
+        <td>{{ result.album.artist }}</td>
+      </tr>
+    </table>
+  </div>
+  <table>
+
+  </table>
+</div>

@@ -78,6 +78,10 @@ nav .links-container {
   max-width: 56rem;
 }
 
+th, td {
+  padding: 0px 15px;
+}
+
 @media (min-width: 640px) {
   html { font-size: 112%; }
 

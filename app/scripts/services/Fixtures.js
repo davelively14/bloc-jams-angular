@@ -37,6 +37,10 @@
       return albumPicasso;
     };
 
+    Fixtures.getAllAlbums = function() {
+      return [albumPicasso, albumMarconi];
+    };
+
     Fixtures.getCollection = function(numberOfAlbum) {
       var result = []
 

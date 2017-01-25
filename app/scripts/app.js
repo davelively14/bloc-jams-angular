@@ -33,6 +33,11 @@
         url: '/user',
         controller: 'UserCtrl as user',
         templateUrl: '/templates/user.html'
+      })
+      .state('search', {
+        url: '/search',
+        controller: 'SearchCtrl as search',
+        templateUrl: '/templates/search.html'
       });
   }
 
