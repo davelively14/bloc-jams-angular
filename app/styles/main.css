@@ -78,7 +78,7 @@ nav .links-container {
   max-width: 56rem;
 }
 
-th, td {
+.search-results td {
   padding: 0px 15px;
 }
 

@@ -1,22 +1,30 @@
 <main class="album-view container narrow">
   <section class="clearfix">
     <div class="column half">
-      <img src="{{ album.albumData.albumArtUrl }}" class="album-cover-art">
+      <img src="{{ albumData.albumArtUrl }}" class="album-cover-art">
     </div>
     <div class="album-view-details column half">
-      <h2 class="album-view-title">{{ album.albumData.title }}</h2>
-      <h3 class="album-view-artist">{{ album.albumData.artist }}</h3>
-      <h5 class="album-view-release-info">{{ album.albumData.label }}</h5>
+      <h2 class="album-view-title">{{ albumData.title }}</h2>
+      <h3 class="album-view-artist">{{ albumData.artist }}</h3>
+      <h5 class="album-view-release-info">{{ albumData.label }}</h5>
+      <span ng-repeat="n in [1, 2, 3, 4, 5]" class="rating">
+        <a ng-click="setRating($index + 1)" ng-show="albumData.rating > $index"><span class="ion-ios-star"></span></a>
+        <a ng-click="setRating($index + 1)" ng-show="albumData.rating <= $index"><span class="ion-ios-star-outline"></span></a>
+      </span>
     </div>
   </section>
   <table class="album-view-song-list">
-    <tr class="album-view-song-item" ng-mouseover="hovered = true" ng-mouseleave="hovered = false" ng-repeat="song in album.albumData.songs">
+    <tr class="album-view-song-item" ng-mouseover="hovered = true" ng-mouseleave="hovered = false" ng-repeat="song in albumData.songs">
       <td class="song-item-number">
         <span ng-show="!song.playing && !hovered">{{ $index + 1 }}</span>
-        <a class="album-song-button" ng-show="!song.playing && hovered" ng-click="album.songPlayer.play(song)"><span class="ion-play"></span></a>
-        <a class="album-song-button" ng-show="song.playing" ng-click="album.songPlayer.pause(song)"><span class="ion-pause"></span></a>
+        <a class="album-song-button" ng-show="!song.playing && hovered" ng-click="songPlayer.play(song)"><span class="ion-play"></span></a>
+        <a class="album-song-button" ng-show="song.playing" ng-click="songPlayer.pause(song)"><span class="ion-pause"></span></a>
       </td>
       <td class="song-item-title">{{ song.title }}</td>
+      <td class="rating">
+        <a ng-click="setSongRating($index, 0)" ng-show="song.rating > 0"><span class="ion-ios-star"></span></a>
+        <a ng-click="setSongRating($index, 1)" ng-show="song.rating < 1"><span class="ion-ios-star-outline"></span></a>
+      </td>
       <td class="song-item-duration">{{ song.duration | timecode }}</td>
     </tr>
   </table>

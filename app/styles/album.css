@@ -67,6 +67,10 @@
   line-height: 28px;
 }
 
+.rating a {
+  cursor: pointer;
+}
+
 @media (max-width: 640px) and (min-width: 320px) {
   .album-view-details {
     text-align: center;
