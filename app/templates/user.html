@@ -1,8 +1,39 @@
 <div class="container narrow">
-  <h1 ng-show="name">{{ name }}</h1>
-  <h1 ng-show="!name">New User</h1>
-  <form name="createUser" ng-submit="submit()" ng-show="!name">
-    <input type="text" ng-model="text" name="text">
-    <input type="submit" id="submit" value="Submit">
+  <h5>UserName: {{ user.userName }}</h5>
+  <h1 ng-show="user.userName">{{ user.userName }}</h1>
+  <h1 ng-show="!user.userName">New User</h1>
+  <form name="createUser" ng-submit="submit()" ng-show="!user.userName">
+    <table>
+      <tr>
+        <td> <label for="text">Name</label> </td>
+        <td> <input type="text" ng-model="text" name="text"> </td>
+      </tr>
+      <tr>
+        <td> <label for="email">Email</label> </td>
+        <td> <input type="text" ng-model="email" name="email"> </td>
+      </tr>
+      <tr>
+        <td> <label for="band">Favorite Band</label> </td>
+        <td> <input type="text" ng-model="band" name="band"> </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td> <input type="submit" id="submit" value="Submit"> </td>
+      </tr>
+    </table>
   </form>
+  <table ng-show="user.userName">
+    <tr>
+      <td><h4>Name: </h4></td>
+      <td><p>{{ user.userName }}</p></td>
+    </tr>
+    <tr>
+      <td><h4>Email: </h4></td>
+      <td><p>{{ user.email }}</p></td>
+    </tr>
+    <tr>
+      <td><h4>Favorite Band: </h4></td>
+      <td><p>{{ user.band }}</p></td>
+    </tr>
+  </table>
 </div>

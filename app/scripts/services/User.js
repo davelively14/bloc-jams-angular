@@ -3,15 +3,21 @@
   function User() {
     var User = {};
 
-    var userName = null;
+    var data = {};
 
-    User.create = function(name) {
-      userName = name;
-    }
+    User.create = function(name, email, band) {
+      data.userName = name;
+      data.email = email;
+      data.band = band;
+    };
 
     User.getName = function() {
       return userName;
-    }
+    };
+
+    User.getUser = function() {
+      return data;
+    };
 
     return User;
   }

@@ -1,11 +1,11 @@
 (function() {
   function UserCtrl(User, $scope) {
-    $scope.name = User.getName();
-    $scope.submit = function() {
-      User.create($scope.text);
-      $scope.name = User.getName();
-    };
+    $scope.user = User.getUser();
 
+    $scope.submit = function() {
+      User.create($scope.text, $scope.email, $scope.band);
+      $scope.user = User.getUser();
+    };
 
   }
 
