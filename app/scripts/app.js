@@ -5,10 +5,10 @@
     // Angular core component. Configures app deep linking path storage.
     $locationProvider
       .html5Mode({
-        // Avoids setting a base
+        // Enabling html5Mode will will disable hashbangs (#!) in the url (i.e. no more bob.io/#!/album)
         enabled: true,
 
-        // requireBase: false will disable hashbangs (#!)
+        // Avoids a common $location:nobase error
         requireBase: false
       });
 
