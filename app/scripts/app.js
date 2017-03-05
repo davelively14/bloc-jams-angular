@@ -12,7 +12,8 @@
         requireBase: false
       });
 
-    // UI-Router core component. Sets route for a module.
+    // UI-Router core component. Sets route for a module. They take stateName
+    // (string) and stateConfig (object) arguments.
     $stateProvider
       .state('landing', {
         url: '/',
@@ -41,7 +42,8 @@
       });
   }
 
-  // This is like calling angular.module(...).config(config). But it's easier to read
+  // This is like calling angular.module(...).config(config). But it's easier to
+  // read the method chaining in this format.
   angular
     .module('blocJams', ['ui.router'])
     .config(config);
